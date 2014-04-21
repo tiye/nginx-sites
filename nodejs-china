@@ -1,0 +1,43 @@
+
+server {
+  server_name index.nodejs-china.org www.nodejs-china.org;
+  access_log /var/log/nginx/nodejs-china.log;
+  location ~ /\.git {
+    deny all;
+  }
+  location / {
+    root /home/chen/repo/nodejs-china;
+    autoindex on;
+    index index.html;
+  }
+}
+
+server {
+  server_name nodejs-china.org;
+  rewrite ^/(.*)$ http://cnodejs.org/$1 permanent;
+}
+
+server {
+  server_name api.nodejs-china.org;
+  rewrite ^/(.*)$ http://nodeapi.ucdok.com/$1 permanent;
+}
+
+server {
+  server_name ask.nodejs-china.org;
+  rewrite ^/(.*)$ http://segmentfault.com/t/node.js/$1 permanent;
+}
+
+server {
+  server_name beginner.nodejs-china.org beginer.nodejs-china.org;
+  rewrite ^/(.*)$ http://www.nodebeginner.org/index-zh-cn.html permanent;
+}
+
+server {
+  server_name topic.nodejs-china.org;
+  rewrite ^/(.*)$ http://cnodejs.org/$1 permanent;
+}
+
+server {
+  server_name wiki.nodejs-china.org;
+  rewrite ^/(.*)$ https://github.com/cnodejs/nodeclub/wiki/_pages/$1 permanent;
+}
