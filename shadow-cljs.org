@@ -1,0 +1,16 @@
+server {
+  server_name shadow-cljs.org;
+  location / {
+    root /home/chen/repo/shadow-cljs/shadow-cljs.org;
+    autoindex on;
+    index index.html;
+  }
+}
+
+server {
+  server_name doc.shadow-cljs.org docs.shadow-cljs.org;
+  location / {
+    deny all;
+  }
+  rewrite ^/(.*)$ https://shadow-cljs.github.io/docs/UsersGuide.html permanent;
+}
