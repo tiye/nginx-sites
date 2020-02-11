@@ -1,10 +1,21 @@
 server {
   server_name shadow-cljs.org;
   location / {
-    root /home/chen/repo/shadow-cljs/shadow-cljs.org;
+    root /web-assets/repo/shadow-cljs/shadow-cljs.org;
     autoindex on;
     index index.html;
   }
+
+    listen 80; # managed by Certbot
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/shadow-cljs.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/shadow-cljs.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+
 }
 
 server {
@@ -13,4 +24,18 @@ server {
     deny all;
   }
   rewrite ^/(.*)$ https://shadow-cljs.github.io/docs/UsersGuide.html permanent;
+
+    listen 80; # managed by Certbot
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/shadow-cljs.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/shadow-cljs.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+
+
+
+
 }
